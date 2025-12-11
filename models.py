@@ -15,6 +15,7 @@ class Proxies(base):
     port = Column(Integer)
     username = Column(String(150), nullable=True)
     password = Column(String(150), nullable=True)
+    site_checked_on = Column(String(150), nullable=False, default='N/A')
     http = Column(String(150), nullable=False, default='Not Checked')
     https = Column(String(150), nullable=False, default='Not Checked')
     socks4 = Column(String(150), nullable=False, default='Not Checked')
@@ -23,11 +24,12 @@ class Proxies(base):
     ping = Column(String(150), nullable=False, default='0 ms')
     last_checked = Column(String(150), nullable=False, default='N/A')
 
-    def __init__(self, host, port, username, password, http, https, socks4, socks5, cloudflare, ping, last_checked):
+    def __init__(self, host, port, username, password, site_checked_on, http, https, socks4, socks5, cloudflare, ping, last_checked):
         self.host = host
         self.port = port
         self.username = username
         self.password = password
+        self.site_checked_on = site_checked_on
         self.http = http
         self.https = https
         self.socks4 = socks4
