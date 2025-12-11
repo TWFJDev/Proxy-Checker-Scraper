@@ -1,0 +1,87 @@
+{
+    "version": "1.0",
+    "last_updated": "07-12-2025 02:20:51",
+    "sources": [
+        {
+            "name": "zloi-user - hideip.me",
+            "protocols": {
+                "http": "https://github.com/zloi-user/hideip.me/raw/refs/heads/master/http.txt",
+                "https": "https://github.com/zloi-user/hideip.me/raw/refs/heads/master/https.txt",
+                "socks4": "https://github.com/zloi-user/hideip.me/raw/refs/heads/master/socks4.txt",
+                "socks5": "https://github.com/zloi-user/hideip.me/raw/refs/heads/master/socks5.txt"
+            }
+        },
+        {
+            "name": "BreakingTechFr - Proxy Free",
+            "protocols": {
+                "http": "https://github.com/BreakingTechFr/Proxy_Free/raw/refs/heads/main/proxies/http.txt",
+                "https": null,
+                "socks4": "https://github.com/BreakingTechFr/Proxy_Free/raw/refs/heads/main/proxies/socks4.txt",
+                "socks5": "https://github.com/BreakingTechFr/Proxy_Free/raw/refs/heads/main/proxies/socks5.txt"
+            }
+        },
+        {
+            "name": "ErcinDedeoglu - Proxies",
+            "protocols": {
+                "http": "https://github.com/ErcinDedeoglu/proxies/raw/refs/heads/main/proxies/http.txt",
+                "https": "https://github.com/ErcinDedeoglu/proxies/raw/refs/heads/main/proxies/https.txt",
+                "socks4": "https://github.com/ErcinDedeoglu/proxies/raw/refs/heads/main/proxies/socks4.txt",
+                "socks5": "https://github.com/ErcinDedeoglu/proxies/raw/refs/heads/main/proxies/socks5.txt"
+            }
+        },
+        {
+            "name": "vakhov - Fresh Proxy List",
+            "protocols": {
+                "http": "https://github.com/vakhov/fresh-proxy-list/raw/refs/heads/master/http.txt",
+                "https": "https://github.com/vakhov/fresh-proxy-list/raw/refs/heads/master/https.txt",
+                "socks4": "https://github.com/vakhov/fresh-proxy-list/raw/refs/heads/master/socks4.txt",
+                "socks5": "https://github.com/vakhov/fresh-proxy-list/raw/refs/heads/master/socks5.txt"
+            }
+        },
+        {
+            "name": "MuRongPIG - Proxy Master",
+            "protocols": {
+                "http": "https://github.com/MuRongPIG/Proxy-Master/raw/refs/heads/main/http.txt",
+                "https": null,
+                "socks4": "https://github.com/MuRongPIG/Proxy-Master/raw/refs/heads/main/socks4.txt",
+                "socks5": "https://github.com/MuRongPIG/Proxy-Master/raw/refs/heads/main/socks5.txt"
+            }
+        },
+        {
+            "name": "officialputuid - KangProxy",
+            "protocols": {
+                "http": "https://github.com/officialputuid/KangProxy/raw/refs/heads/KangProxy/http/http.txt",
+                "https": "https://github.com/officialputuid/KangProxy/raw/refs/heads/KangProxy/https/https.txt",
+                "socks4": "https://github.com/officialputuid/KangProxy/raw/refs/heads/KangProxy/socks4/socks4.txt",
+                "socks5": "https://github.com/officialputuid/KangProxy/raw/refs/heads/KangProxy/socks5/socks5.txt"
+            }
+        },
+        {
+            "name": "sunny9577 - Proxy Scraper",
+            "protocols": {
+                "http": "https://github.com/sunny9577/proxy-scraper/raw/refs/heads/master/generated/http_proxies.txt",
+                "https": null,
+                "socks4": "https://github.com/sunny9577/proxy-scraper/raw/refs/heads/master/generated/socks4_proxies.txt",
+                "socks5": "https://github.com/sunny9577/proxy-scraper/raw/refs/heads/master/generated/socks5_proxies.txt"
+            }
+        },
+        {
+            "name": "proxifly - Free Proxy List",
+            "protocols": {
+                "http": "https://github.com/proxifly/free-proxy-list/raw/refs/heads/main/proxies/protocols/http/data.txt",
+                "https": "https://github.com/proxifly/free-proxy-list/raw/refs/heads/main/proxies/protocols/https/data.txt",
+                "socks4": "https://github.com/proxifly/free-proxy-list/raw/refs/heads/main/proxies/protocols/socks4/data.txt",
+                "socks5": "https://github.com/proxifly/free-proxy-list/raw/refs/heads/main/proxies/protocols/socks5/data.txt"
+            }
+        },
+        {
+            "name": "TheSpeedX - Proxy List",
+            "protocols": {
+                "http": "https://github.com/TheSpeedX/PROXY-List/raw/refs/heads/master/http.txt",
+                "https": null,
+                "socks4": "https://github.com/TheSpeedX/PROXY-List/raw/refs/heads/master/socks4.txt",
+                "socks5": "https://github.com/TheSpeedX/PROXY-List/raw/refs/heads/master/socks5.txt"
+            }
+        }
+    ]
+}
