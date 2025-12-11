@@ -2,6 +2,8 @@ from customtkinter import *
 import json
 from util import scrape
 from threading import Thread
+import tkinter as tk
+from tkinter import ttk
 
 class App(CTk):
 
@@ -16,6 +18,7 @@ class App(CTk):
 
         self.tabs_setup()
         self.scrape_tab_stuff()
+        self.proxy_database()
 
     def tabs_setup(self):
         tabview = CTkTabview(self, width=880, height=880)
@@ -23,7 +26,7 @@ class App(CTk):
 
         self.scrape_tab = tabview.add('Scrape Proxies')
         self.check_tab = tabview.add('Check Proxies')
-        self.proxy_database = tabview.add('Proxy Database')
+        self.proxy_database_tab = tabview.add('Proxy Database')
 
     def scrape_tab_stuff(self):
         with open('sources.json', 'r') as f:
@@ -64,6 +67,55 @@ class App(CTk):
         
         self.log_box = CTkTextbox(self.scrape_tab)
         self.log_box.pack(fill="both", expand=True, pady=10, padx=10)
+
+    def proxy_database(self):
+        table_frame = CTkFrame(self.proxy_database_tab)
+        table_frame.pack(fill="both", expand=True, padx=10, pady=10)
+
+        style = ttk.Style()
+        style.theme_use("clam")
+
+        style.configure(
+            "Vertical.TScrollbar",
+            background="#2B2B2B",
+            troughcolor="#1E1E1E",
+            arrowcolor="white",
+            bordercolor="#2B2B2B",
+            borderwidth=0,
+            relief="flat"
+        )
+
+        scrollbar = ttk.Scrollbar(table_frame, orient="vertical", style="Vertical.TScrollbar")
+        scrollbar.pack(side="right", fill="y")
+
+        columns = ("ID", "Name", "Email")
+        tree = ttk.Treeview(
+            table_frame,
+            columns=columns,
+            show="headings",
+            yscrollcommand=scrollbar.set
+        )
+
+        for col in columns:
+            tree.heading(col, text=col)
+            tree.column(col, width=150)
+
+        tree.pack(fill="both", expand=True)
+        scrollbar.config(command=tree.yview)
+
+        style.configure(
+            "Treeview",
+            background="#2B2B2B",
+            foreground="white",
+            rowheight=28,
+            fieldbackground="#2B2B2B",
+            bordercolor="#2B2B2B",
+            borderwidth=0
+        )
+        style.map(
+            "Treeview",
+            background=[("selected", "#1E90FF")]
+        )
         
     def log(self, message):
         try:
