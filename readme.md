@@ -10,17 +10,17 @@ This tool:
 
 ---
 
-## 🚀 Features
+## Features
 
-- 🕸️ Scrape proxy lists from multiple GitHub URLs
-- 🗃️ Store proxies in a structured SQLite database
-- 🔍 Prevent duplicate proxies (host + port) on scrape
-- 🧠 Easy integration with a proxy **checker system**
-- 📌 Minimal dependencies (requests, SQLAlchemy)
+- Scrape proxy lists from multiple GitHub URLs
+- Store proxies in a structured SQLite database
+- Prevent duplicate proxies (host + port) on scrape
+- Easy integration with a proxy **checker system**
+- Minimal dependencies (requests, SQLAlchemy)
 
 ---
 
-## 🔧 Requirements
+## Requirements
 
 Make sure you have:
 
@@ -32,3 +32,4 @@ Install dependencies:
 
 ```bash
 pip install -r requirements.txt
+```
