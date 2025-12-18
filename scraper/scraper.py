@@ -63,25 +63,26 @@ def scrape():
 
                     if (host, int(port)) in existing_proxies:
                         continue
+                    
+                    if int(port) <= 65535:
+                        new_proxy = models.Proxies(
+                            host=host,
+                            port=int(port),
+                            username=None,
+                            password=None,
+                            site_checked_on=None,
+                            http=None,
+                            https=None,
+                            socks4=None,
+                            socks4a=None,
+                            socks5=None,
+                            socks5h=None,
+                            cloudflare=None,
+                            last_checked=None
+                        )
 
-                    new_proxy = models.Proxies(
-                        host=host,
-                        port=int(port),
-                        username=None,
-                        password=None,
-                        site_checked_on=None,
-                        http=None,
-                        https=None,
-                        socks4=None,
-                        socks4a=None,
-                        socks5=None,
-                        socks5h=None,
-                        cloudflare=None,
-                        last_checked=None
-                    )
-
-                    session.add(new_proxy)
-                    existing_proxies.add((host, int(port)))
+                        session.add(new_proxy)
+                        existing_proxies.add((host, int(port)))
 
         print("\nInserting Proxies Into DB!")
 
