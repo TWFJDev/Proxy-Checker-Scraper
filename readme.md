@@ -27,6 +27,9 @@ Make sure you have:
 - Python 3.8+
 - `requests`
 - `SQLAlchemy`
+- `PySocks`
+- `schedule`
+- `cloudscraper`
 
 Install dependencies:
 
