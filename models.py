@@ -25,10 +25,9 @@ class Proxies(base):
     socks4a = Column(Boolean, nullable=True, default=False)
     socks5 = Column(Boolean, nullable=True, default=False)
     socks5h = Column(Boolean, nullable=True, default=False)
-    cloudflare = Column(Boolean, nullable=True, default=False)
     last_checked = Column(String(150), nullable=True, default=None)
 
-    def __init__(self, host, port, username, password, site_checked_on, http, https, socks4, socks4a, socks5, socks5h, cloudflare, last_checked):
+    def __init__(self, host, port, username, password, site_checked_on, http, https, socks4, socks4a, socks5, socks5h, last_checked):
         self.host = host
         self.port = port
         self.username = username
@@ -40,7 +39,6 @@ class Proxies(base):
         self.socks4a = socks4a
         self.socks5 = socks5
         self.socks5h = socks5h
-        self.cloudflare = cloudflare
         self.last_checked = last_checked
 
 base.metadata.create_all(engine)

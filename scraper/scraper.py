@@ -77,7 +77,6 @@ def scrape():
                             socks4a=None,
                             socks5=None,
                             socks5h=None,
-                            cloudflare=None,
                             last_checked=None
                         )
 
