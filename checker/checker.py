@@ -98,7 +98,7 @@ def checker(site_url, success_key, workers, batch):
 
 # Run the checker
 url = "https://crunchyroll.com"
-success_key = "<title>Crunchyroll: Watch Popular Anime, Play Games &amp; Shop Online</title>"
+success_key = "<title>Crunchyroll"
 workers = 20
 batch = 5
 
