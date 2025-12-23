@@ -1,4 +1,4 @@
-import cloudscraper, models
+import cloudscraper, models, requests
 from sqlalchemy.orm import sessionmaker
 from contextlib import contextmanager
 from datetime import datetime, timezone
@@ -20,6 +20,8 @@ def get_session():
 
 def check_proxy(site_url, success_key, host, port, proxy_type="http", timeout=5):
     url = site_url
+
+    user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36'
     
     if proxy_type in ["http", "https"]:
         proxies = {proxy_type: f"http://{host}:{port}"}
@@ -32,8 +34,8 @@ def check_proxy(site_url, success_key, host, port, proxy_type="http", timeout=5)
         raise ValueError(f"Unsupported proxy type: {proxy_type}")
 
     try:
-        with cloudscraper.create_scraper() as scraper:
-            resp = scraper.get(url, proxies=proxies, timeout=timeout)
+        with requests.Session() as session:
+            resp = session.get(url, proxies=proxies, headers={'User-Agent': user_agent}, timeout=timeout)
 
             if success_key in resp.content.decode('utf-8'):
                 return True
@@ -54,57 +56,48 @@ def check_proxy_all_types(site_url, success_key, host, port):
     }
 
 def checker(site_url, success_key, workers, batch):
-    with get_session() as session:
-        proxies_list = session.query(models.Proxies.id, models.Proxies.host, models.Proxies.port).yield_per(batch)
-        updates = []
+    last_id = 0
 
-        # Use ThreadPoolExecutor to check proxies in parallel
-        with ThreadPoolExecutor(max_workers=workers) as executor:
-            future_to_proxy = {
-                executor.submit(check_proxy_all_types, site_url, success_key, host, port): (proxy_id, host, port)
-                for proxy_id, host, port in proxies_list
-            }
+    while True:
+        with get_session() as session:
+            proxies_list = (session.query(models.Proxies.id, models.Proxies.host, models.Proxies.port).filter(models.Proxies.id > last_id).order_by(models.Proxies.id).limit(batch).all())
 
-            for future in as_completed(future_to_proxy):
-                proxy_id, host, port = future_to_proxy[future]
-                try:
-                    result = future.result()
-                except Exception:
-                    result = {
-                        "http": False,
-                        "https": False,
-                        "socks4": False,
-                        "socks4a": False,
-                        "socks5": False,
-                        "socks5h": False
-                    }
+            if not proxies_list:
+                break
 
-                updates.append({
-                    "id": proxy_id,
-                    **result,
-                    "last_checked": datetime.now(timezone.utc)
-                })
+            updates = []
 
-                print(f"{host}:{port}", result)
+            with ThreadPoolExecutor(max_workers=workers) as executor:
+                future_to_proxy = {executor.submit(check_proxy_all_types, site_url, success_key, host, port): (proxy_id, host, port) for proxy_id, host, port in proxies_list}
 
-                if len(updates) >= batch:
-                    session.bulk_update_mappings(models.Proxies, updates)
-                    session.commit()
-                    updates.clear()
+                for future in as_completed(future_to_proxy):
+                    proxy_id, host, port = future_to_proxy[future]
 
-        if updates:
-            session.bulk_update_mappings(models.Proxies, updates)
-            session.commit()
+                    try:
+                        result = future.result()
+                    except Exception:
+                        result = {"http": False, "https": False, "socks4": False, "socks4a": False, "socks5": False, "socks5h": False}
 
-# Run the checker
-url = "https://crunchyroll.com"
-success_key = "<title>Crunchyroll"
-workers = 20
-batch = 5
+                    updates.append({"id": proxy_id, **result, "last_checked": datetime.now(timezone.utc)})
 
-checker(
-    url,
-    success_key,
-    workers,
-    batch
-)
+                    print(f"{host}:{port}", result)
+
+            if updates:
+                session.bulk_update_mappings(models.Proxies, updates)
+                session.commit()
+
+            last_id = proxies_list[-1][0]
+
+# url = "https://crunchyroll.com"
+# success_key = "<title>Crunchyroll"
+# url = 'https://ip-api.com/'
+# success_key = '<title>IP-API.com - Geolocation API</title>'
+# workers = 100
+# batch = 50
+
+# checker(
+#     url,
+#     success_key,
+#     workers,
+#     batch
+# )

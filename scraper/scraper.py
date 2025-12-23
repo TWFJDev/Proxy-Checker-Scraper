@@ -88,4 +88,4 @@ def scrape():
     print("\nFinished Scraping!")
 
 
-scrape()
+# scrape()
