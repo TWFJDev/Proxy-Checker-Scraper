@@ -85,7 +85,7 @@ def scrape():
 
         print("\nInserting Proxies Into DB!")
 
-    print("\nFinished Scraping!")
+    print("\nFinished Scraping!\n")
 
 
 # scrape()
