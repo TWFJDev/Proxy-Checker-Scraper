@@ -43,14 +43,14 @@ def scrape():
             with requests.Session() as req:
                 print(f'[{i}/{len(urls)}] | {url}')
 
-                i += 1
-
                 try:
                     resp = req.get(url)
                     resp.raise_for_status()
                 except requests.RequestException:
-                    print(f"Failed to fetch {url}")
+                    print(f"[{i}/{len(urls)}] | Failed to fetch {url}")
                     continue
+
+                i += 1
 
                 for proxy in resp.text.split():
                     line = proxy.strip().replace(' ', '_')
@@ -86,6 +86,3 @@ def scrape():
         print("\nInserting Proxies Into DB!")
 
     print("\nFinished Scraping!\n")
-
-
-# scrape()

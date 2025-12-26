@@ -1,4 +1,4 @@
-import cloudscraper, models, requests
+import models, requests
 from sqlalchemy.orm import sessionmaker
 from contextlib import contextmanager
 from datetime import datetime, timezone
@@ -87,17 +87,3 @@ def checker(site_url, success_key, workers, batch):
                 session.commit()
 
             last_id = proxies_list[-1][0]
-
-# url = "https://crunchyroll.com"
-# success_key = "<title>Crunchyroll"
-# url = 'https://ip-api.com/'
-# success_key = '<title>IP-API.com - Geolocation API</title>'
-# workers = 100
-# batch = 50
-
-# checker(
-#     url,
-#     success_key,
-#     workers,
-#     batch
-# )
