@@ -29,7 +29,6 @@ Make sure you have:
 - `SQLAlchemy`
 - `PySocks`
 - `schedule`
-- `cloudscraper`
 
 Install dependencies:
 
