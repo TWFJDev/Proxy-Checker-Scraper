@@ -2,6 +2,8 @@ from checker.checker import checker
 from scraper.scraper import scrape
 from count_proxies.count_proxies import count_proxies
 from export_proxies.export_proxies import run_checks
+import tkinter as tk
+from tkinter.filedialog import askdirectory
 import os
 import platform
 
@@ -46,12 +48,16 @@ Choose An Option >> """)
 
             elif option == '2':
                 clear_screen()
+                root = tk.Tk()
+                root.withdraw()
                 print('Proxy Checker / Scraper -\n')
                 site_url = input('What site would you like to check the proxies against (https://example.com) >> ')
                 success_key = input('What shows a valid request (<title>example</title>) >> ')
                 protocols = "Choose a protocol:\n[1] HTTP\n[2] HTTPS\n[3] SOCKS4\n[4] SOCKS4A\n[5] SOCKS5\n[6] SOCKS5H"
                 print(protocols)
                 protocol = input('Option >> ')
+                print('Where would you like to save the proxies >> ')
+                save_location = askdirectory(title="Where would you like to save the proxies")
                 if protocol == '1':
                     protocol_final = 'http'
                 elif protocol == '2':
@@ -69,6 +75,11 @@ Choose An Option >> """)
                 print()
                 print('Starting Check! (If proxy is valid info will print)\n')
                 results = run_checks(site_url, success_key, protocol_final, goal_count, threads)
+                print('\nSaving proxies to file!')
+                with open(fr'{save_location}/{len(results)}_{protocol_final.lower()}_proxies.txt', 'a') as f:
+                    for result in results:
+                        f.writelines(result['proxy'])
+                        f.writelines('\n')
                 input('\nPress enter to go back to the main screen...')
 
             elif option == '3':
