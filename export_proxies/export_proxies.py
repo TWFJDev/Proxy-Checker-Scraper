@@ -71,7 +71,7 @@ def check_proxy_all_types(site_url, success_key, host, port):
         "socks5h": check_proxy(site_url, success_key, host, port, "socks5h")
     }
 
-def proxy_check_future(site_url, success_key, protocol):
+def proxy_check_future(site_url, success_key):
     proxy = get_random_proxy()
     if not proxy:
         return False
@@ -103,8 +103,7 @@ def run_checks(
                 executor.submit(
                     proxy_check_future,
                     site_url,
-                    success_key,
-                    protocol
+                    success_key
                 )
             )
 
@@ -121,6 +120,7 @@ def run_checks(
                     if result[protocol.lower()] == True:
                         found += 1
                         print(f"[+] {protocol.upper()} valid ({found}/{goal_count})")
+                        results.append(result)
                     else:
                         pass
                 except Exception:
@@ -131,8 +131,7 @@ def run_checks(
                         executor.submit(
                             proxy_check_future,
                             site_url,
-                            success_key,
-                            protocol
+                            success_key
                         )
                     )
                 else:

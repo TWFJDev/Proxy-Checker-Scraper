@@ -98,6 +98,7 @@ Choose An Option >> """)
             break
 
         except Exception as e:
-            print(f'Error: {e}\n')
+            print('Proxy Checker / Scraper -\n')
+            print(f'Error: {e}. Press enter to try again...')
 
 start()
